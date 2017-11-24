@@ -13,6 +13,7 @@
     "express": "*",
     "ipfs": "*",
     "path": "*",
+    "body-parser": "*",
     "morgan": "*"
   }
 }

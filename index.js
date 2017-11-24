@@ -2,6 +2,7 @@
 let express = require('express')
 let logger = require('morgan');
 let path = require('path');
+let bodyParser = require('body-parser')
 let app = express();
 let Ipfs = require('ipfs')
 
