@@ -48,6 +48,11 @@ app.post('/upload', function (req, res) {
         console.log('Failed cat')
         console.log(err)
       }
+      console.log('getting file')
+      files.forEach((file) => {
+        console.log(file.path)
+        console.log(file.content.toString('utf8'))
+      })
       res.send('getting file')
     })
   })
