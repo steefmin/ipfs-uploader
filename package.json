@@ -16,6 +16,6 @@
     "body-parser": "*",
     "morgan": "*",
     "wrtc": "*",
-    "libp2p-webrtc-start": "*"
+    "libp2p-webrtc-star": "*"
   }
 }
