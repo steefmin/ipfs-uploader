@@ -11,7 +11,7 @@ app.use(logger('dev'))
 
 app.use(express.static(path.join(__dirname, 'src')))
 
-let port = process.env.port || 5000
+let port = process.env.PORT || 5000
 
 app.listen(port)
 console.log('listening on port: ' + port)
