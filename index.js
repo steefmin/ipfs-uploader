@@ -45,7 +45,7 @@ app.post('/upload', function (req, res) {
       console.log(err)
     }
     console.log('trying to get: ' + req.body.ipfsPath)
-    node.files.get(req.body.ipfsPath, function (err, data){
+    node.files.get(req.body.ipfsPath, function (err, files){
       if (err) {
         console.log('Failed cat')
         console.log(err)
