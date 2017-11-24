@@ -5,7 +5,7 @@ let path = require('path');
 let app = express();
 let Ipfs = require('ipfs')
 
-let node = new Ipfs()
+//let node = new Ipfs()
 
 app.use(logger('dev'))
 
