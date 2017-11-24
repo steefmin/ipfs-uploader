@@ -6,7 +6,7 @@ let path = require('path');
 let bodyParser = require('body-parser')
 let app = express();
 let IPFS = require('ipfs')
-let wrtc = require('electron-wrtc') // or require('electron-webrtc')()
+let wrtc = require('electron-webrtc') // or require('electron-webrtc')()
 let WStar = require('libp2p-webrtc-star')
 let wstar = new WStar({ wrtc: wrtc })
 
