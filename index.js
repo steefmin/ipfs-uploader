@@ -24,11 +24,12 @@ app.post('/upload', function (req, res) {
       console.log('Failed connect')
       console.log(err)
     }
-    node.files.cat(req.body.ipfsPath, function (err, data){
+    node.files.get(req.body.ipfsPath, function (err, data){
       if (err) {
         console.log('Failed cat')
         console.log(err)
       }
+      res.send('getting file')
     })
   })
 })
