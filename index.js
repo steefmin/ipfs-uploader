@@ -16,7 +16,7 @@ let node = new IPFS({
     Addresses: {
       Swarm: [
         "/ip4/0.0.0.0/tcp/4002",
-        "/ip4/127.0.0.1/tcp/4003/ws",
+        "/ip4/0.0.0.0/tcp/4003/ws",
         "/dns4/star-signal.cloud.ipfs.team/wss/p2p-webrtc-star"
       ]
     }
@@ -43,20 +43,22 @@ app.post('/upload', function (req, res) {
     if (err) {
       console.log('Failed connect')
       console.log(err)
-    }
-    console.log('trying to get: ' + req.body.ipfsPath)
-    node.files.get(req.body.ipfsPath, function (err, files){
-      if (err) {
-        console.log('Failed cat')
-        console.log(err)
-      }
-      console.log('getting file')
-      files.forEach((file) => {
-        console.log(file.path)
-        console.log(file.content.toString('utf8'))
+    } else {
+      console.log('trying to get: ' + req.body.ipfsPath)
+      node.files.get(req.body.ipfsPath, function (err, files){
+        if (err) {
+          console.log('Failed cat')
+          console.log(err)
+        } else {
+          console.log('getting file')
+          files.forEach((file) => {
+            console.log(file.path)
+            console.log(file.content.toString('utf8'))
+          })
+          res.send('getting file')
+        }
       })
-      res.send('getting file')
-    })
+    }
   })
 })
 

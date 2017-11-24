@@ -7,29 +7,24 @@ node.once('ready', () => {
   document.getElementById("status").innerHTML= 'Node status: ' + (node.isOnline() ? 'online' : 'offline')
 
   node.files.add(new node.types.Buffer('Hello world!'), (err, filesAdded) => {
-
     if (err) {
       return console.error('Error - ipfs files add', err, res)
-    }
-
-    filesAdded.forEach((file) => {
-
-      console.log('successfully stored', file.hash)
-
-      node.id(function (err, identity)  {
-        if (err) {
-          console.log(err)
-        }
-        let request = {clientAddress:identity.addresses[0], ipfsPath:'QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY'}
-        console.log('sending request' + JSON.stringify(request))
-        xhttp.open("POST", "https://ipfs-uploader.herokuapp.com/upload", true)
-        xhttp.setRequestHeader("Content-Type", "application/json")
-        xhttp.send(JSON.stringify(request))
-        console.log(xhttp.response)
+    } else {
+      filesAdded.forEach((file) => {
+        console.log('successfully stored', file.hash)
+        node.id(function (err, identity)  {
+          if (err) {
+            console.log(err)
+          } else {
+            let request = {clientAddress:identity.addresses[0], ipfsPath:'QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY'}
+            console.log('sending request' + JSON.stringify(request))
+            xhttp.open("POST", "https://ipfs-uploader.herokuapp.com/upload", false)
+            xhttp.setRequestHeader("Content-Type", "application/json")
+            xhttp.send(JSON.stringify(request))
+            console.log(xhttp.response)
+          }
+        })
       })
-
-    })
-
+    }
   })
-
 })
