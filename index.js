@@ -5,12 +5,12 @@ let logger = require('morgan');
 let path = require('path');
 let bodyParser = require('body-parser')
 let app = express();
-let Ipfs = require('ipfs')
-const wrtc = require('wrtc') // or require('electron-webrtc')()
-const WStar = require('libp2p-webrtc-star')
-const wstar = new WStar({ wrtc: wrtc })
+let IPFS = require('ipfs')
+let wrtc = require('wrtc') // or require('electron-webrtc')()
+let WStar = require('libp2p-webrtc-star')
+let wstar = new WStar({ wrtc: wrtc })
 
-const node = new IPFS({
+let node = new IPFS({
   repo: 'ipfs-uploader-heroku-1',
   config: {
     Addresses: {
