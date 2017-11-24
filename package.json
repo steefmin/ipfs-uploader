@@ -14,6 +14,8 @@
     "ipfs": "*",
     "path": "*",
     "body-parser": "*",
-    "morgan": "*"
+    "morgan": "*",
+    "wrtc": "*",
+    "libp2p-webrtc-start": "*"
   }
 }

@@ -1,14 +1,33 @@
 'use strict'
+let port = process.env.PORT || 5000
 let express = require('express')
 let logger = require('morgan');
 let path = require('path');
 let bodyParser = require('body-parser')
 let app = express();
 let Ipfs = require('ipfs')
+const wrtc = require('wrtc') // or require('electron-webrtc')()
+const WStar = require('libp2p-webrtc-star')
+const wstar = new WStar({ wrtc: wrtc })
 
-let port = process.env.PORT || 5000
-
-let node = new Ipfs({repo: 'ipfs-uploader-heroku-1'})
+const node = new IPFS({
+  repo: 'ipfs-uploader-heroku-1',
+  config: {
+    Addresses: {
+      Swarm: [
+        "/ip4/0.0.0.0/tcp/4002",
+        "/ip4/127.0.0.1/tcp/4003/ws",
+        "/dns4/star-signal.cloud.ipfs.team/wss/p2p-webrtc-star"
+      ]
+    }
+  },
+  libp2p: {
+    modules: {
+      transport: [wstar],
+      discovery: [wstar.discovery]
+    }
+  }
+})
 
 app.use(logger('dev'))
 
