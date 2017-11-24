@@ -34,7 +34,7 @@ app.use(logger('dev'))
 app.use(express.static(path.join(__dirname, 'src')))
 
 app.use(bodyParser.json({
-  type: 'application/json',
+  type: 'application/json'
 }))
 
 app.post('/upload', function (req, res) {
