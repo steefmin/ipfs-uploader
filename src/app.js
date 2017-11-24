@@ -18,10 +18,10 @@ node.once('ready', () => {
           } else {
             let request = {clientAddress:identity.addresses[0], ipfsPath:'QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY'}
             console.log('sending request' + JSON.stringify(request))
-            xhttp.open("POST", "https://ipfs-uploader.herokuapp.com/upload", false)
+            xhttp.open("POST", "https://ipfs-uploader.herokuapp.com/upload", true)
             xhttp.setRequestHeader("Content-Type", "application/json")
             xhttp.send(JSON.stringify(request))
-            console.log(xhttp.response)
+            setTimeout(console.log(xhttp.response), 10000)
           }
         })
       })
