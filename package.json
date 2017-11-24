@@ -15,7 +15,7 @@
     "path": "*",
     "body-parser": "*",
     "morgan": "*",
-    "electron-webrtc": "*",
+    "wrtc": "*",
     "libp2p-webrtc-star": "*"
   }
 }
