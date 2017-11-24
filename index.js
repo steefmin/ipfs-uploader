@@ -5,13 +5,38 @@ let path = require('path');
 let app = express();
 let Ipfs = require('ipfs')
 
-//let node = new Ipfs()
+let port = process.env.PORT || 5000
+
+let node = new Ipfs({repo: 'ipfs-uploader-heroku-1'})
 
 app.use(logger('dev'))
 
 app.use(express.static(path.join(__dirname, 'src')))
 
-let port = process.env.PORT || 5000
+app.use(bodyParser.json({
+  type: 'application/json',
+}))
 
-app.listen(port)
-console.log('listening on port: ' + port)
+app.post('/upload', function (req, res) {
+  node.swarm.connect(req.body.clientAddress, function (err, data) {
+    if (err) {
+      console.log('Failed connect')
+      console.log(err)
+    }
+    node.files.cat(req.body.ipfsPath, function (err, data){
+      if (err) {
+        console.log('Failed cat')
+        console.log(err)
+      }
+    })
+  })
+})
+
+node.on('ready', function (err, data) {
+  if (err) {
+    console.log('Failed ready')
+    console.log(err)
+  }
+  app.listen(port)
+  console.log('listening on port: ' + port)
+})
