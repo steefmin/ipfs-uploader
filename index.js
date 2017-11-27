@@ -31,9 +31,9 @@ app.use(bodyParser.json({
 }))
 
 app.post('/upload', function (req, res) {
+/*
   console.log('trying to connect to: ' + req.body.clientAddress)
 
-/*
   node.swarm.connect(req.body.clientAddress, function (err, data) {
     if (err) {
       console.log('Failed connect')
@@ -42,22 +42,17 @@ app.post('/upload', function (req, res) {
     } else {
       console.log('trying to get: ' + req.body.ipfsPath)
 */
-      node.files.get(req.body.ipfsPath, function (err, files) {
-        if (err) {
-          console.log('Failed get')
-          console.log(err)
-          res.end()
-        } else {
-          console.log('got file')
-          console.log(files)
-          files.forEach(function (file) {
-            console.log(file.path)
-            console.log(file.content.toString('utf8'))
-          })
-
-          res.send('getting file')
-        }
-      })
+  node.files.get(req.body.ipfsPath, function (err, files) {
+    if (err) {
+      console.log('Failed get')
+      console.log(err)
+      res.end()
+    }
+  }).then(function (stream) {
+    stream.on('data', function (chunk) {
+      console.log(chunk)
+    })
+  })
 //    }
 //  })
 })
