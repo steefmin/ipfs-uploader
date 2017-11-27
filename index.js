@@ -68,9 +68,8 @@ node.on('ready', function (err, data) {
   if (err) {
     console.log('Failed ready')
     console.log(err)
+  } else {
+    app.listen(port)
+    console.log('listening on port: ' + port)
   }
-  console.log('listening on port: ' + port)
 })
-
-  app.listen(port)
-  
