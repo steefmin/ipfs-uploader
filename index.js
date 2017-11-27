@@ -66,7 +66,7 @@ node.on('ready', function (err, data) {
   } else {
     app.listen(port)
     console.log('listening on port: ' + port)
-    setInterval(logPeers, 60000)
+    //setInterval(logPeers, 60000)
   }
 })
 
