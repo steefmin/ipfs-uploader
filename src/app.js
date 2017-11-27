@@ -1,6 +1,15 @@
-const node = new Ipfs(
-  { repo: 'ipfs-' + Math.random() }
-)
+const node = new Ipfs({
+  repo: 'ipfs-uploader-client-' + Math.random(),
+  config: {
+    Addresses: {
+      Swarm: [
+        '/dns4/wrtc-star.discovery.libp2p.io/wss/p2p-webrtc-star',
+        '/dns4/ws-star.discovery.libp2p.io/wss/p2p-websocket-star'
+      ]
+    }
+  }
+})
+
 var xhttp = new XMLHttpRequest()
 
 node.once('ready', () => {
@@ -27,7 +36,11 @@ node.once('ready', () => {
               xhttp.open('POST', 'https://ipfs-uploader.herokuapp.com/upload', true)
               xhttp.setRequestHeader('Content-Type', 'application/json')
               xhttp.send(JSON.stringify(request))
-              setTimeout(console.log(xhttp.response), 10000)
+              console.log('waiting for response')
+              setTimeout(function () {
+                console.log(xhttp.response)
+                console.log('done waiting')
+              }, 20000)
             })
           }
         })

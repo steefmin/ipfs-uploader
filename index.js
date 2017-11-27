@@ -6,9 +6,6 @@ let path = require('path')
 let bodyParser = require('body-parser')
 let app = express()
 let IPFS = require('ipfs')
-let wrtc = require('wrtc') // or require('electron-webrtc')()
-let WStar = require('libp2p-webrtc-star')
-let wstar = new WStar({ wrtc: wrtc })
 
 let node = new IPFS({
   repo: 'ipfs-uploader-heroku-1',
@@ -17,14 +14,8 @@ let node = new IPFS({
       Swarm: [
         '/ip4/0.0.0.0/tcp/4002',
         '/ip4/0.0.0.0/tcp/4003/ws',
-        '/dns4/star-signal.cloud.ipfs.team/wss/p2p-webrtc-star'
+        '/dns4/ws-star.discovery.libp2p.io/wss/p2p-websocket-star'
       ]
-    }
-  },
-  libp2p: {
-    modules: {
-      transport: [wstar],
-      discovery: [wstar.discovery]
     }
   }
 })
@@ -41,22 +32,28 @@ app.use(bodyParser.json({
 
 app.post('/upload', function (req, res) {
   console.log('trying to connect to: ' + req.body.clientAddress)
+
   node.swarm.connect(req.body.clientAddress, function (err, data) {
     if (err) {
       console.log('Failed connect')
       console.log(err)
+      res.end()
     } else {
       console.log('trying to get: ' + req.body.ipfsPath)
+
       node.files.get(req.body.ipfsPath, function (err, files) {
         if (err) {
-          console.log('Failed cat')
+          console.log('Failed get')
           console.log(err)
+          res.end()
         } else {
-          console.log('getting file')
+          console.log('got file')
+
           files.forEach((file) => {
             console.log(file.path)
             console.log(file.content.toString('utf8'))
           })
+
           res.send('getting file')
         }
       })
