@@ -22,7 +22,7 @@ node.once('ready', () => {
         console.log('peers failed: ' + err)
       } else {
         document.getElementById('peers').innerHTML = peers.reduce(function (total, current) {
-          return total + current + '\n'
+          return total + current.addr + '\n'
         }, '')
       }
     })
