@@ -16,15 +16,17 @@ node.once('ready', () => {
   console.log('Online status: ', node.isOnline() ? 'online' : 'offline')
   document.getElementById('status').innerHTML = 'Node status: ' + (node.isOnline() ? 'online' : 'offline')
 
-  setInterval(node.swarm.peers(function(err, peers) {
-    if (err) {
-      console.log('peers failed: ' + err)
-    } else {
-      peers.map(function (peer) {
-        console.log('peer: ' + peer.addr)
-      })
-    }
-  }), 10000)
+  setInterval(function () {
+    node.swarm.peers(function (err, peers) {
+      if (err) {
+        console.log('peers failed: ' + err)
+      } else {
+        peers.map(function (peer) {
+          console.log('peer: ' + peer.addr)
+        })
+      }
+    })
+  }, 10000)
 
   node.files.add(new node.types.Buffer('Hello world!'), (err, filesAdded) => {
     if (err) {
