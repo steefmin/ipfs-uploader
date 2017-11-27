@@ -5,6 +5,7 @@ let logger = require('morgan')
 let path = require('path')
 let bodyParser = require('body-parser')
 let app = express()
+let bl = require('bl')
 let IPFS = require('ipfs')
 
 let node = new IPFS({
@@ -42,15 +43,18 @@ app.post('/upload', function (req, res) {
     } else {
       console.log('trying to get: ' + req.body.ipfsPath)
 */
-  node.files.get(req.body.ipfsPath).then(function (stream) {
-    console.log(stream)
-    stream.on('data', function (chunk) {
-      console.log(chunk)
-    })
-    stream.content.on('data', function (chunk) {
-      console.log(chunk)
-    })
-  })
+  node.files.get(req.body.ipfsPath, function (err, file) {
+  if (err) {
+    console.log(err)
+  } else {
+    file.pipe(bl(function(err, data) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(data.toString())
+      }
+    }))
+  }
 //    }
 //  })
 })

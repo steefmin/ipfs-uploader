@@ -14,6 +14,7 @@
     "ipfs": "*",
     "path": "*",
     "body-parser": "*",
-    "morgan": "*"
+    "morgan": "*",
+    "bl": "*"
   }
 }
