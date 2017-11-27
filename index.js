@@ -33,6 +33,7 @@ app.use(bodyParser.json({
 app.post('/upload', function (req, res) {
   console.log('trying to connect to: ' + req.body.clientAddress)
 
+/*
   node.swarm.connect(req.body.clientAddress, function (err, data) {
     if (err) {
       console.log('Failed connect')
@@ -40,7 +41,7 @@ app.post('/upload', function (req, res) {
       res.end()
     } else {
       console.log('trying to get: ' + req.body.ipfsPath)
-
+*/
       node.files.get(req.body.ipfsPath, function (err, files) {
         if (err) {
           console.log('Failed get')
@@ -57,8 +58,8 @@ app.post('/upload', function (req, res) {
           res.send('getting file')
         }
       })
-    }
-  })
+//    }
+//  })
 })
 
 node.on('ready', function (err, data) {
@@ -68,5 +69,18 @@ node.on('ready', function (err, data) {
   } else {
     app.listen(port)
     console.log('listening on port: ' + port)
+    setInterval(logPeers, 30000)
   }
 })
+
+function logPeers () {
+  node.swarm.peers(function (err, peers) {
+    if (err) {
+      console.log('failed loading peers: ' + err)
+    } else {
+      peers.map(function (peer) {
+        console.log(peer.addr)
+      })
+    }
+  })
+}
