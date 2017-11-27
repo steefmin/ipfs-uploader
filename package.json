@@ -15,7 +15,7 @@
     "path": "*",
     "body-parser": "*",
     "morgan": "*",
-    "wrtc": "0.0.60",
+    "wrtc": "0.0.62",
     "libp2p-webrtc-star": "*"
   }
 }
