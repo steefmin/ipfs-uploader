@@ -26,8 +26,8 @@ node.once('ready', () => {
           if (err) {
             console.log(err)
           } else {
-            console.log(identity.adresses)
-            identity.adresses.forEach(function (adress) {
+            console.log(identity)
+            identity.addresses.forEach(function (adress) {
               let request = {
                 clientAddress: adress,
                 ipfsPath: 'QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY'
