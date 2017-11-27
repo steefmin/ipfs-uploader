@@ -21,9 +21,9 @@ node.once('ready', () => {
       if (err) {
         console.log('peers failed: ' + err)
       } else {
-        peers.map(function (peer) {
-          console.log('peer: ' + peer.addr)
-        })
+        document.getElementById('peers').innerHTML = peers.reduce(function (total, current) {
+          return total + current + '\n'
+        }, '')
       }
     })
   }, 10000)
