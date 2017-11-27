@@ -1,10 +1,10 @@
 'use strict'
 let port = process.env.PORT || 5000
 let express = require('express')
-let logger = require('morgan');
-let path = require('path');
+let logger = require('morgan')
+let path = require('path')
 let bodyParser = require('body-parser')
-let app = express();
+let app = express()
 let IPFS = require('ipfs')
 let wrtc = require('wrtc') // or require('electron-webrtc')()
 let WStar = require('libp2p-webrtc-star')
@@ -15,9 +15,9 @@ let node = new IPFS({
   config: {
     Addresses: {
       Swarm: [
-        "/ip4/0.0.0.0/tcp/4002",
-        "/ip4/0.0.0.0/tcp/4003/ws",
-        "/dns4/star-signal.cloud.ipfs.team/wss/p2p-webrtc-star"
+        '/ip4/0.0.0.0/tcp/4002',
+        '/ip4/0.0.0.0/tcp/4003/ws',
+        '/dns4/star-signal.cloud.ipfs.team/wss/p2p-webrtc-star'
       ]
     }
   },
@@ -47,7 +47,7 @@ app.post('/upload', function (req, res) {
       console.log(err)
     } else {
       console.log('trying to get: ' + req.body.ipfsPath)
-      node.files.get(req.body.ipfsPath, function (err, files){
+      node.files.get(req.body.ipfsPath, function (err, files) {
         if (err) {
           console.log('Failed cat')
           console.log(err)
