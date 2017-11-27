@@ -47,6 +47,9 @@ app.post('/upload', function (req, res) {
     stream.on('data', function (chunk) {
       console.log(chunk)
     })
+    stream.content.on('data', function (chunk) {
+      console.log(chunk)
+    })
   })
 //    }
 //  })
