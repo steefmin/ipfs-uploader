@@ -42,13 +42,8 @@ app.post('/upload', function (req, res) {
     } else {
       console.log('trying to get: ' + req.body.ipfsPath)
 */
-  node.files.get(req.body.ipfsPath, function (err, files) {
-    if (err) {
-      console.log('Failed get')
-      console.log(err)
-      res.end()
-    }
-  }).then(function (stream) {
+  node.files.get(req.body.ipfsPath).then(function (stream) {
+    console.log(stream)
     stream.on('data', function (chunk) {
       console.log(chunk)
     })
