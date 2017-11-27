@@ -29,6 +29,8 @@ let node = new IPFS({
   }
 })
 
+console.log('starting server')
+
 app.use(logger('dev'))
 
 app.use(express.static(path.join(__dirname, 'src')))
