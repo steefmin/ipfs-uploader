@@ -49,7 +49,7 @@ app.post('/upload', function (req, res) {
           res.end()
         } else {
           console.log('got file')
-
+          console.log(files)
           files.forEach(function (file) {
             console.log(file.path)
             console.log(file.content.toString('utf8'))
@@ -69,7 +69,7 @@ node.on('ready', function (err, data) {
   } else {
     app.listen(port)
     console.log('listening on port: ' + port)
-    setInterval(logPeers, 30000)
+    setInterval(logPeers, 60000)
   }
 })
 
