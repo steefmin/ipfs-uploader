@@ -47,7 +47,8 @@ app.post('/upload', function (req, res) {
     if (err) {
       console.log(err)
     } else {
-      file.pipe(bl(function (err, data) {
+      console.log(file)
+      file.content.pipe(bl(function (err, data) {
         if (err) {
           console.log(err)
         } else {
