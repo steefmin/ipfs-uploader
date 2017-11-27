@@ -69,6 +69,8 @@ node.on('ready', function (err, data) {
     console.log('Failed ready')
     console.log(err)
   }
-  app.listen(port)
   console.log('listening on port: ' + port)
 })
+
+  app.listen(port)
+  
