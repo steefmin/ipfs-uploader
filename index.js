@@ -32,7 +32,7 @@ app.use(bodyParser.json({
 }))
 
 app.post('/upload', function (req, res) {
-  res.send('hash received')
+  res.send('request received')
 
   console.log('trying to connect to: ' + req.body.clientAddress)
   node.swarm.connect(node.types.multiaddr(req.body.clientAddress), function (err) {
