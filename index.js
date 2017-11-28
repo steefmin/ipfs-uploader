@@ -32,16 +32,16 @@ app.use(bodyParser.json({
 }))
 
 app.post('/upload', function (req, res) {
-/*
-  console.log('trying to connect to: ' + req.body.clientAddress)
+  res.send('hash received')
 
-  node.swarm.connect(req.body.clientAddress, function (err, data) {
+  console.log('trying to connect to: ' + req.body.clientAddress)
+  node.swarm.connect(node.types.multiaddr(req.body.clientAddress), function (err) {
     if (err) {
       console.log('Failed connect')
       console.log(err)
-      res.end()
-    } else {
-*/
+    }
+  })
+
   console.log('trying to cat: ' + req.body.ipfsPath)
   node.files.cat(req.body.ipfsPath, function (err, file) {
     if (err) {
@@ -61,8 +61,6 @@ app.post('/upload', function (req, res) {
       }))
     }
   })
-//    }
-//  })
 })
 
 node.on('ready', function (err, data) {
