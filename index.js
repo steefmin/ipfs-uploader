@@ -13,11 +13,7 @@ let node = new IPFS({
   config: {
     Addresses: {
       Swarm: [
-        '/ip4/0.0.0.0/tcp/4002',
-        '/ip4/0.0.0.0/tcp/4003/ws',
-        '/ip4/0.0.0.0/tcp/4004/wss',
-        '/dns4/ws-star.discovery.libp2p.io/wss/p2p-websocket-star',
-        '/dns4/ws-star.discovery.libp2p.io/ws/p2p-websocket-star'
+        '/dns4/ws-star.discovery.libp2p.io/wss/p2p-websocket-star'
       ]
     }
   }

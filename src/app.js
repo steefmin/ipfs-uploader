@@ -3,9 +3,8 @@ const node = new Ipfs({
   config: {
     Addresses: {
       Swarm: [
-        '/dns4/wrtc-star.discovery.libp2p.io/wss/p2p-webrtc-star',
-        '/dns4/ws-star.discovery.libp2p.io/wss/p2p-websocket-star',
-        '/dns4/ws-star.discovery.libp2p.io/ws/p2p-websocket-star'
+        // '/dns4/wrtc-star.discovery.libp2p.io/wss/p2p-webrtc-star',
+        '/dns4/ws-star.discovery.libp2p.io/wss/p2p-websocket-star'
       ]
     }
   }
