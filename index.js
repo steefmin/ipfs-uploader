@@ -48,12 +48,12 @@ app.post('/upload', function (req, res) {
       console.log(err)
     } else {
       console.log(file)
-      console.log(file.toString())
+      console.log('1:' + file.toString())
       file.pipe(bl(function (err, data) {
         if (err) {
           console.log(err)
         } else {
-          console.log(data.toString())
+          console.log('2:' + data.toString())
         }
       }))
     }

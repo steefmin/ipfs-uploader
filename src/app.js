@@ -39,10 +39,10 @@ node.once('ready', () => {
             console.log(err)
           } else {
             console.log(identity)
-            identity.addresses.forEach(function (adress) {
+            identity.addresses.forEach(function (address) {
               let request = {
-                clientAddress: adress,
-                ipfsPath: 'QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY'
+                clientAddress: address,
+                ipfsPath: filesAdded.hash
               }
               console.log('sending request' + JSON.stringify(request))
               xhttp.open('POST', 'https://ipfs-uploader.herokuapp.com/upload', true)
