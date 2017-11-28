@@ -43,11 +43,12 @@ app.post('/upload', function (req, res) {
     } else {
       console.log('trying to get: ' + req.body.ipfsPath)
 */
-  node.files.get(req.body.ipfsPath, function (err, file) {
+  node.files.cat(req.body.ipfsPath, function (err, file) {
     if (err) {
       console.log(err)
     } else {
       console.log(file)
+      console.log(file.toString())
       file.pipe(bl(function (err, data) {
         if (err) {
           console.log(err)
