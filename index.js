@@ -81,7 +81,7 @@ function logPeers () {
       console.log('failed loading peers: ' + err)
     } else {
       peers.map(function (peer) {
-        console.log(peer.addr)
+        console.log(peer.addr.toString())
       })
     }
   })
