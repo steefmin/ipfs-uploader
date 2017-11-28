@@ -14,19 +14,10 @@ var xhttp = new XMLHttpRequest()
 
 node.once('ready', () => {
   console.log('Online status: ', node.isOnline() ? 'online' : 'offline')
+
   document.getElementById('status').innerHTML = 'Node status: ' + (node.isOnline() ? 'online' : 'offline')
 
-  setInterval(function () {
-    node.swarm.peers(function (err, peers) {
-      if (err) {
-        console.log('peers failed: ' + err)
-      } else {
-        document.getElementById('peers').innerHTML = peers.reduce(function (total, current) {
-          return total + current.addr + '\n'
-        }, '')
-      }
-    })
-  }, 2000)
+  setInterval(listPeers, 2000)
 
   node.files.add(new node.types.Buffer('Hello planet ' + Math.random().toString().substring(2)), (err, filesAdded) => {
     if (err) {
@@ -44,14 +35,7 @@ node.once('ready', () => {
                 clientAddress: address,
                 ipfsPath: '/ipfs/' + file.hash
               }
-              console.log('sending request' + JSON.stringify(request))
-              xhttp.open('POST', 'https://ipfs-uploader.herokuapp.com/upload', true)
-              xhttp.setRequestHeader('Content-Type', 'application/json')
-              xhttp.send(JSON.stringify(request))
-              console.log('waiting for response')
-              setTimeout(function () {
-                console.log(xhttp.response)
-              }, 5000)
+              requestUpload(request)
             })
           }
         })
@@ -59,3 +43,26 @@ node.once('ready', () => {
     }
   })
 })
+
+function listPeers () {
+  node.swarm.peers(function (err, peers) {
+    if (err) {
+      console.log('peers failed: ' + err)
+    } else {
+      document.getElementById('peers').innerHTML = peers.reduce(function (total, current) {
+        return total + current.addr + '\n'
+      }, '')
+    }
+  })
+}
+
+function requestUpload (request) {
+  console.log('sending request' + JSON.stringify(request))
+  xhttp.open('POST', 'https://ipfs-uploader.herokuapp.com/upload', true)
+  xhttp.setRequestHeader('Content-Type', 'application/json')
+  xhttp.send(JSON.stringify(request))
+  console.log('waiting for response')
+  setTimeout(function () {
+    console.log(xhttp.response)
+  }, 5000)
+}
