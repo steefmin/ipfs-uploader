@@ -15,7 +15,6 @@
     "path": "*",
     "body-parser": "*",
     "morgan": "*",
-    "bl": "*",
-    "libp2p-websockets": "*"
+    "bl": "*"
   }
 }
