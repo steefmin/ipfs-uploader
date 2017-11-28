@@ -33,15 +33,26 @@ app.post('/upload', function (req, res) {
   res.send('request received')
 
   console.log('trying to connect to: ' + req.body.clientAddress)
-  node.swarm.connect(node.types.multiaddr(req.body.clientAddress), function (err) {
-    if (err) {
-      console.log('Failed connect')
-      console.log(err)
-    }
-  })
+  // connect(req.body.clientAddress)
 
   console.log('trying to cat: ' + req.body.ipfsPath)
-  node.files.cat(req.body.ipfsPath, function (err, file) {
+  cat(req.body.ipfsPath)
+  cat('/ipfs/QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY')
+})
+
+node.on('ready', function (err, data) {
+  if (err) {
+    console.log('Failed ready')
+    console.log(err)
+  } else {
+    app.listen(port)
+    console.log('listening on port: ' + port)
+    setInterval(logPeers, 60000)
+  }
+})
+
+function cat (path) {
+  node.files.cat(path, function (err, file) {
     if (err) {
       console.log(err)
     } else {
@@ -59,18 +70,16 @@ app.post('/upload', function (req, res) {
       }))
     }
   })
-})
+}
 
-node.on('ready', function (err, data) {
-  if (err) {
-    console.log('Failed ready')
-    console.log(err)
-  } else {
-    app.listen(port)
-    console.log('listening on port: ' + port)
-    setInterval(logPeers, 60000)
-  }
-})
+function connect (addr) {
+  node.swarm.connect(node.types.multiaddr(addr), function (err) {
+    if (err) {
+      console.log('Failed connect')
+      console.log(err)
+    }
+  })
+}
 
 function logPeers () {
   node.swarm.peers(function (err, peers) {
