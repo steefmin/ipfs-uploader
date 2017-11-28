@@ -7,6 +7,7 @@ let bodyParser = require('body-parser')
 let app = express()
 let bl = require('bl')
 let IPFS = require('ipfs')
+const WebSockets = require('libp2p-websockets')
 
 let node = new IPFS({
   repo: 'ipfs-uploader-heroku-1',
@@ -17,6 +18,11 @@ let node = new IPFS({
         '/ip4/0.0.0.0/tcp/4003/ws',
         '/dns4/ws-star.discovery.libp2p.io/wss/p2p-websocket-star'
       ]
+    }
+  },
+  libp2p: {
+    modules: {
+      transport: [new WebSockets()]
     }
   }
 })
@@ -70,7 +76,7 @@ node.on('ready', function (err, data) {
   } else {
     app.listen(port)
     console.log('listening on port: ' + port)
-    // setInterval(logPeers, 60000)
+    setInterval(logPeers, 60000)
   }
 })
 

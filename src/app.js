@@ -3,7 +3,7 @@ const node = new Ipfs({
   config: {
     Addresses: {
       Swarm: [
-      //  '/dns4/wrtc-star.discovery.libp2p.io/wss/p2p-webrtc-star',
+        '/dns4/wrtc-star.discovery.libp2p.io/wss/p2p-webrtc-star',
         '/dns4/ws-star.discovery.libp2p.io/wss/p2p-websocket-star'
       ]
     }
@@ -26,7 +26,7 @@ node.once('ready', () => {
         }, '')
       }
     })
-  }, 10000)
+  }, 2000)
 
   node.files.add(new node.types.Buffer('Hello planet ' + Math.random().toString().substring(2)), (err, filesAdded) => {
     if (err) {
