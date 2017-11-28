@@ -32,10 +32,8 @@ app.use(bodyParser.json({
 app.post('/upload', function (req, res) {
   res.send('request received')
 
-  console.log('trying to connect to: ' + req.body.clientAddress)
   // connect(req.body.clientAddress)
 
-  console.log('trying to cat: ' + req.body.ipfsPath)
   cat(req.body.ipfsPath)
   cat('/ipfs/QmQzCQn4puG4qu8PVysxZmscmQ5vT1ZXpqo7f58Uh9QfyY')
 })
@@ -52,14 +50,11 @@ node.on('ready', function (err, data) {
 })
 
 function cat (path) {
+  console.log('trying to cat: ' + path)
   node.files.cat(path, function (err, file) {
     if (err) {
       console.log(err)
     } else {
-      console.log('obj?')
-      console.log(file)
-      console.log('first try:')
-      console.log(file.toString())
       file.pipe(bl(function (err, data) {
         if (err) {
           console.log(err)
@@ -73,6 +68,7 @@ function cat (path) {
 }
 
 function connect (addr) {
+  console.log('trying to connect to: ' + addr)
   node.swarm.connect(node.types.multiaddr(addr), function (err) {
     if (err) {
       console.log('Failed connect')
