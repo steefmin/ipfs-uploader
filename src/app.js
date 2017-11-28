@@ -51,7 +51,7 @@ node.once('ready', () => {
               console.log('waiting for response')
               setTimeout(function () {
                 console.log(xhttp.response)
-              }, 20000)
+              }, 5000)
             })
           }
         })
