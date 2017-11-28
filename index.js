@@ -47,13 +47,16 @@ app.post('/upload', function (req, res) {
     if (err) {
       console.log(err)
     } else {
+      console.log('obj?')
       console.log(file)
-      console.log('1:' + file.toString())
+      console.log('first try:')
+      console.log(file.toString())
       file.pipe(bl(function (err, data) {
         if (err) {
           console.log(err)
         } else {
-          console.log('2:' + data.toString())
+          console.log('second try:')
+          console.log(data.toString())
         }
       }))
     }

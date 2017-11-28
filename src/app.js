@@ -28,7 +28,7 @@ node.once('ready', () => {
     })
   }, 10000)
 
-  node.files.add(new node.types.Buffer('Hello planet ' + Math.random()), (err, filesAdded) => {
+  node.files.add(new node.types.Buffer('Hello planet ' + Math.random().toString().substring(2)), (err, filesAdded) => {
     if (err) {
       return console.error('Error - ipfs files add', err)
     } else {
