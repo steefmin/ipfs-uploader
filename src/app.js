@@ -42,7 +42,7 @@ node.once('ready', () => {
             identity.addresses.forEach(function (address) {
               let request = {
                 clientAddress: address,
-                ipfsPath: filesAdded.hash
+                ipfsPath: '/ipfs/' + file.hash
               }
               console.log('sending request' + JSON.stringify(request))
               xhttp.open('POST', 'https://ipfs-uploader.herokuapp.com/upload', true)

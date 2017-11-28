@@ -41,8 +41,8 @@ app.post('/upload', function (req, res) {
       console.log(err)
       res.end()
     } else {
-      console.log('trying to get: ' + req.body.ipfsPath)
 */
+  console.log('trying to cat: ' + req.body.ipfsPath)
   node.files.cat(req.body.ipfsPath, function (err, file) {
     if (err) {
       console.log(err)
